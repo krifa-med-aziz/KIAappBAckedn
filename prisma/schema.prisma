@@ -1,13 +1,64 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model Service {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  price       Int
+  duration    Int
+
+  agencies     Agency[]      @relation("AgencyServices")
+  appointments Appointment[]
+}
+
+model Agency {
+  id        Int    @id @default(autoincrement())
+  name      String
+  location  String
+  latitude  Float?
+  longitude Float?
+
+  services     Service[]     @relation("AgencyServices")
+  appointments Appointment[]
+}
+
+model Vehicle {
+  id      Int    @id @default(autoincrement())
+  name    String
+  plate   String
+  mileage String
+  type    String
+
+  vin String? @unique
+
+  userId    String
+  createdAt DateTime @default(now())
+
+  appointments Appointment[]
+}
+
+model Appointment {
+  id     Int    @id @default(autoincrement())
+  userId String
+
+  vehicleId Int
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+
+  serviceId Int
+  service   Service @relation(fields: [serviceId], references: [id])
+
+  agencyId Int
+  agency   Agency @relation(fields: [agencyId], references: [id])
+
+  date DateTime
+  time String
+
+  status    String
+  createdAt DateTime @default(now())
 }

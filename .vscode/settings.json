@@ -1,0 +1,6 @@
+{
+  "prisma.schemaFilePath": "prisma/schema.prisma",
+  "files.exclude": {
+    "**/node_modules": true
+  }
+}
