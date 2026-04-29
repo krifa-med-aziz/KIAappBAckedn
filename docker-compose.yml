@@ -1,0 +1,18 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.6.1
+    command: start-dev --import-realm
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HOSTNAME: 192.168.100.74
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./kia-app-realm.json:/opt/keycloak/data/import/kia-app-realm.json
+      - keycloak_data:/opt/keycloak/data
+
+volumes:
+  keycloak_data:
