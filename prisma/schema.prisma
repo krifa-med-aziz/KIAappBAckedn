@@ -29,16 +29,19 @@ model Agency {
 }
 
 model Vehicle {
-  id      Int    @id @default(autoincrement())
-  name    String
-  plate   String
-  mileage String
-  type    String
-
-  vin String? @unique
-
-  userId    String
-  createdAt DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  name         String
+  plate        String
+  mileage      String
+  type         String
+  vin          String?  @unique
+  brand        String?  // Marque / Constructeur (FIAT)
+  model        String?  // Modèle / Type commercial (PUNTO)
+  dpmc         String?  // Date première mise en circulation (2013/12/13)
+  ownerName    String?  // Nom du titulaire (عواطف بوصلاح)
+  cin          String?  // CIN ou MF (03989990) — extracted from carte grise
+  userId       String
+  createdAt    DateTime @default(now())
 
   appointments Appointment[]
 }

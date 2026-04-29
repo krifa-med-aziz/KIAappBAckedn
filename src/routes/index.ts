@@ -4,12 +4,14 @@ import agenciesRouter from "./agencies";
 import vehiclesRouter from "./vehicles";
 import appointmentsRouter from "./appointments";
 import authRouter from "./auth";
+import vehicleScanRouter from "./vehicleScan";
 
 const router = Router();
 
 router.use("/auth", authRouter);
 router.use("/services", servicesRouter);
 router.use("/agencies", agenciesRouter);
+router.use("/vehicles", vehicleScanRouter);
 router.use("/vehicles", vehiclesRouter);
 router.use("/appointments", appointmentsRouter);
 
